@@ -27,7 +27,7 @@ class DataTransformer:
             logger.info(f"价格统计:\n- 平均订单金额: {df['total_price'].mean():.2f}\n- 平均折扣率: {df['discount_rate'].mean():.2%}")
             
             # 从日志字段提取设备型号
-            df['device_model'] = df['log_info'].str.extract(r'device_model[":]\s*([^,"\}]+)')
+            df['device_model'] = df['log_info'].str.extract(r'device_model[":]\s*(?P<model>[^,"\}]+)')
             device_stats = df['device_model'].value_counts().head()
             logger.info(f"设备统计:\n- 设备型号分布(Top 5):\n{device_stats.to_string()}")
             
